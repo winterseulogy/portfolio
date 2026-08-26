@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>winterseulogy // YoRHa Animation Archives</title>
+  <!-- Google Fonts: Inter for UI body, Consolas/Monospace for tech tags -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <script>
+async function copyHandle(btn) {
+    try {
+      await navigator.clipboard.writeText('winterseulogy');
+      const originalText = btn.innerText;
+      btn.innerText = '> COPIED_SUCCESS';
+
+      setTimeout(() => {
+        btn.innerText = originalText;
+      }, 1500);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
+</script>
+  <style>
+    :root {
+      --nier-bg: #c8c4b0;
+      --nier-bg-pattern: #bebaa6;
+      --nier-panel: #cdcaa8;
+      --nier-dark: #454339;
+      --nier-black: #2b2a24;
+      --nier-muted: #6b6858;
+      --nier-accent: #575446;
+      --nier-border: #807c6c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Share Tech Mono', monospace, sans-serif;
+      background-color: var(--nier-bg);
+      /* NieR scanline pattern */
+      background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+      );
+      color: var(--nier-dark);
+      line-height: 1.5;
+      text-transform: uppercase;
+      padding: 2rem 1rem;
+    }
+
+    /* Decorative Top System Bar */
+    .system-bar {
+      max-width: 1000px;
+      margin: 0 auto 1rem;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--nier-dark);
+      padding-bottom: 0.25rem;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: var(--nier-muted);
+    }
+
+    header {
+      max-width: 1000px;
+      margin: 0 auto 2.5rem;
+      background: rgba(205, 202, 168, 0.4);
+      padding: 2rem;
+      border: 1px solid var(--nier-border);
+      position: relative;
+    }
+
+    /* Corner Accents for NieR UI frames */
+    header::before, header::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border: 2px solid var(--nier-dark);
+    }
+    header::before { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+    header::after { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+
+    h1 {
+      margin: 0;
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      letter-spacing: 3px;
+      color: var(--nier-black);
+      border-bottom: 1px dashed var(--nier-border);
+      padding-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--nier-accent);
+      font-weight: bold;
+      margin-top: 0.75rem;
+      letter-spacing: 1.5px;
+      font-size: 1rem;
+    }
+
+    .subtitle::before {
+      content: '■ ';
+      font-size: 0.8rem;
+    }
+
+    .bio {
+      color: var(--nier-muted);
+      max-width: 700px;
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--nier-dark);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    /* NieR Card Styling */
+    .card {
+      background: var(--nier-panel);
+      border: 1px solid var(--nier-dark);
+      position: relative;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 4px 4px 0px var(--nier-dark);
+    }
+
+    /* Double line border effect on top of cards */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      right: 3px;
+      height: 1px;
+      background: var(--nier-border);
+      z-index: 2;
+    }
+
+    .video-container {
+      position: relative;
+      background: #111;
+      border-bottom: 1px solid var(--nier-dark);
+    }
+
+    .card video, .card img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      display: block;
+      filter: sepia(15%) contrast(105%);
+    }
+
+    .card-info {
+      padding: 1.2rem;
+    }
+
+    .card-info h3 {
+      margin: 0 0 0.4rem 0;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      color: var(--nier-black);
+    }
+
+    .card-info p {
+      margin: 0;
+      color: var(--nier-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Footer styling */
+    footer {
+      max-width: 1000px;
+      margin: 4rem auto 2rem;
+      padding: 1.5rem;
+      border-top: 2px solid var(--nier-dark);
+      border-bottom: 1px solid var(--nier-dark);
+      background: rgba(205, 202, 168, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    button.btn {
+      display: inline-block;
+      background: var(--nier-dark);
+      color: var(--nier-bg);
+      padding: 0.4rem 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    button.btn:hover {
+      background: var(--nier-black);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NieR System Header Status Bar -->
+  <div class="system-bar">
+    <span>SYSTEM: ONLINE</span>
+    <span>PROJECT: ANIMATION_ARCHIVE</span>
+    <span>LOC: R6_RIG</span>
+  </div>
+
+  <header>
+    <h1>winterseulogy // R: @user74820135</h1>
+    <div class="subtitle">ROBLOX 3D ANIMATOR [BLENDER]</div>
+    <p class="bio"> Specializing in R6 rig animations. Open for commissions.</p>
+  </header>
+
+  <main>
+    <div class="section-title">01 // FEATURED_RECORDS</div>
+
+    <div class="grid">
+
+      <!-- Showreel Item 1 -->
+      <div class="card">
+        <div class="video-container">
+          <video autoplay loop muted playsinline>
+            <source src="media/sword-combo.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="card-info">
+          <h3>[RECORD_01] BLANK</h3>
+          <p>RIG_TYPE: R6 • BLANK</p>
+        </div>
+      </div>
+
+      <!-- Showreel Item 2 -->
+      <div class="card">
+        <div class="video-container">
+          <video autoplay loop muted playsinline>
+            <source src="media/gun-reload.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="card-info">
+          <h3>[RECORD_02] BLANK</h3>
+          <p>RIG_TYPE: R6 • BLANK</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p> DISCORD (@winterseulogy)</p>
+    <button class="btn" onclick="copyHandle(this)">> COPY_HANDLE</button>
+  </footer>
+
+</body>
+</html>
